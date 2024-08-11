@@ -130,14 +130,13 @@ function onCallUserIdsForEvent(eventType, patientType) {
 function onCallGroups(userId) {
   let map = {};
 
-  for (let i = 0; i < groups.length; i++) {
-    for (let i = 0; i < groups[i].users.length; i++) {
-      let theUser = groups[i].users[i];
+  for (group of groups) {
+    for (theUser of group.users) {
       if (theUser.on_call) {
         if (theUser.id in map) {
-          map[theUser.id].push({ id: groups[i].id, name: groups[i].name });
+          map[theUser.id].push({ id: group.id, name: group.name });
         } else {
-          map[theUser.id] = [{ id: groups[i].id, name: groups[i].name }];
+          map[theUser.id] = [{ id: group.id, name: group.name }];
         }
       }
     }
@@ -146,8 +145,8 @@ function onCallGroups(userId) {
   return map[userId];
 }
 
-// console.log(onCallGroups(2));
-// console.log(onCallGroups(5));
+console.log(onCallGroups(2));
+console.log(onCallGroups(5));
 
 // todo(matthew): learn how to test array equality properly in plain JS xD
 // console.assert(
