@@ -86,7 +86,6 @@ const groups = [
 
 function onCallUserIdsForEvent(eventType, patientType) {
   let team = [];
-  let i = 0;
 
   //iterate through the groups
   for (group of groups) {
@@ -128,24 +127,24 @@ function onCallUserIdsForEvent(eventType, patientType) {
  * @returns {object[]} -- include the ID and name for each group in which the user is on call, i.e.
  *                        [{ "id": 1, "name": "Emergency Department" }]
  */
-// function onCallGroups(userId) {
-//   let map = {};
+function onCallGroups(userId) {
+  let map = {};
 
-//   for (let i = 0; i < groups.length; i++) {
-//     for (let j = 0; j < groups[i].users.length; j++) {
-//       let theUser = groups[i].users[j];
-//       if (theUser.on_call) {
-//         if (theUser.id in map) {
-//           map[theUser.id].push({ id: groups[i].id, name: groups[i].name });
-//         } else {
-//           map[theUser.id] = [{ id: groups[i].id, name: groups[i].name }];
-//         }
-//       }
-//     }
-//   }
+  for (let i = 0; i < groups.length; i++) {
+    for (let j = 0; j < groups[i].users.length; j++) {
+      let theUser = groups[i].users[j];
+      if (theUser.on_call) {
+        if (theUser.id in map) {
+          map[theUser.id].push({ id: groups[i].id, name: groups[i].name });
+        } else {
+          map[theUser.id] = [{ id: groups[i].id, name: groups[i].name }];
+        }
+      }
+    }
+  }
 
-//   return map[userId];
-// }
+  return map[userId];
+}
 
 // console.log(onCallGroups(2));
 // console.log(onCallGroups(5));
