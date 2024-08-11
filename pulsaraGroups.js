@@ -74,7 +74,7 @@ const groups = [
   },
 ];
 
-/* ----------------------------------------- QUESTION 1 : OPTION 1 --------------------------------- */
+/* ----------------------------------------- QUESTION 1 ----------------------------------------- */
 
 /**
  * Return a list of user IDs who should be notified of the given event
@@ -121,17 +121,36 @@ function onCallUserIdsForEvent(eventType, patientType) {
 // console.log(onCallUserIdsForEvent("on_inbound_ems", "STROKE"));
 // console.log(onCallUserIdsForEvent("on_inbound_transfer", "GENERAL"));
 
+/* -----------------------------------------   QUESTION 2   ----------------------------------------- */
 /**
  * Return group data for which the given user ID is on call
  * @param {int} userId -- the user ID to check
  * @returns {object[]} -- include the ID and name for each group in which the user is on call, i.e.
  *                        [{ "id": 1, "name": "Emergency Department" }]
  */
-// function onCallGroups(userId) {
-//   // todo: implement
-// }
+function onCallGroups(userId) {
+  let map = {};
 
-// // todo(matthew): learn how to test array equality properly in plain JS xD
+  for (let i = 0; i < groups.length; i++) {
+    for (let j = 0; j < groups[i].users.length; j++) {
+      let theUser = groups[i].users[j];
+      if (theUser.on_call) {
+        if (theUser.id in map) {
+          map[theUser.id].push({ id: groups[i].id, name: groups[i].name });
+        } else {
+          map[theUser.id] = [{ id: groups[i].id, name: groups[i].name }];
+        }
+      }
+    }
+  }
+
+  return map[userId];
+}
+
+console.log(onCallGroups(2));
+console.log(onCallGroups(5));
+
+// todo(matthew): learn how to test array equality properly in plain JS xD
 // console.assert(
 //   onCallUserIdsForEvent("on_activation", "STEMI").join(",") === "3"
 // );
