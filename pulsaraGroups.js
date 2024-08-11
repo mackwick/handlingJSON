@@ -74,7 +74,7 @@ const groups = [
   },
 ];
 
-/* ----------------------------------------- QUESTION 1 ----------------------------------------- */
+/* ----------------------------------------- QUESTION 1: VERSION 1 ----------------------------------------- */
 
 /**
  * Return a list of user IDs who should be notified of the given event
@@ -145,8 +145,8 @@ function onCallGroups(userId) {
   return map[userId];
 }
 
-console.log(onCallGroups(2));
-console.log(onCallGroups(5));
+// console.log(onCallGroups(2));
+// console.log(onCallGroups(5));
 
 // todo(matthew): learn how to test array equality properly in plain JS xD
 // console.assert(
