@@ -74,7 +74,7 @@ const groups = [
   },
 ];
 
-/* ----------------------------------------- QUESTION 1: VERSION 1 ----------------------------------------- */
+/* ----------------------------------------- QUESTION 1 ----------------------------------------- */
 
 /**
  * Return a list of user IDs who should be notified of the given event
