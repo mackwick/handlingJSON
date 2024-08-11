@@ -89,9 +89,9 @@ function onCallUserIdsForEvent(eventType, patientType) {
   let i = 0;
 
   //iterate through the groups
-  while (i < groups.length) {
-    let theEvents = groups[i].events;
-    let theUsers = groups[i].users;
+  for (group of groups) {
+    let theEvents = group.events;
+    let theUsers = group.users;
 
     //check for type match
     let j = 0;
@@ -113,13 +113,13 @@ function onCallUserIdsForEvent(eventType, patientType) {
       }
       j++;
     }
-    i++;
   }
   return team;
 }
 
 // console.log(onCallUserIdsForEvent("on_inbound_ems", "STROKE"));
 // console.log(onCallUserIdsForEvent("on_inbound_transfer", "GENERAL"));
+// console.log(onCallUserIdsForEvent("on_consult", "STROKE"));
 
 /* -----------------------------------------   QUESTION 2   ----------------------------------------- */
 /**
@@ -128,27 +128,27 @@ function onCallUserIdsForEvent(eventType, patientType) {
  * @returns {object[]} -- include the ID and name for each group in which the user is on call, i.e.
  *                        [{ "id": 1, "name": "Emergency Department" }]
  */
-function onCallGroups(userId) {
-  let map = {};
+// function onCallGroups(userId) {
+//   let map = {};
 
-  for (let i = 0; i < groups.length; i++) {
-    for (let j = 0; j < groups[i].users.length; j++) {
-      let theUser = groups[i].users[j];
-      if (theUser.on_call) {
-        if (theUser.id in map) {
-          map[theUser.id].push({ id: groups[i].id, name: groups[i].name });
-        } else {
-          map[theUser.id] = [{ id: groups[i].id, name: groups[i].name }];
-        }
-      }
-    }
-  }
+//   for (let i = 0; i < groups.length; i++) {
+//     for (let j = 0; j < groups[i].users.length; j++) {
+//       let theUser = groups[i].users[j];
+//       if (theUser.on_call) {
+//         if (theUser.id in map) {
+//           map[theUser.id].push({ id: groups[i].id, name: groups[i].name });
+//         } else {
+//           map[theUser.id] = [{ id: groups[i].id, name: groups[i].name }];
+//         }
+//       }
+//     }
+//   }
 
-  return map[userId];
-}
+//   return map[userId];
+// }
 
-console.log(onCallGroups(2));
-console.log(onCallGroups(5));
+// console.log(onCallGroups(2));
+// console.log(onCallGroups(5));
 
 // todo(matthew): learn how to test array equality properly in plain JS xD
 // console.assert(
