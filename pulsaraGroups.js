@@ -93,31 +93,31 @@ function onCallUserIdsForEvent(eventType, patientType) {
     let theUsers = group.users;
 
     //check for type match
-    let j = 0;
+    let i = 0;
     let typeMatch = false;
 
-    while (j < theEvents.length && typeMatch === false) {
-      if (theEvents[j].type === eventType) {
+    while (i < theEvents.length && typeMatch === false) {
+      if (theEvents[i].type === eventType) {
         typeMatch = true;
 
         //check for patient match
-        if (theEvents[j].patients.includes(patientType)) {
+        if (theEvents[i].patients.includes(patientType)) {
           //on call?
-          for (let k = 0; k < theUsers.length; k++) {
-            if (theUsers[k].on_call) {
-              team.push(theUsers[k].id);
+          for (theUser of theUsers) {
+            if (theUser.on_call) {
+              team.push(theUser.id);
             }
           }
         }
       }
-      j++;
+      i++;
     }
   }
   return team;
 }
 
 // console.log(onCallUserIdsForEvent("on_inbound_ems", "STROKE"));
-// console.log(onCallUserIdsForEvent("on_inbound_transfer", "GENERAL"));
+// console.log(onCallUserIdsForEvent("on_inpatient", "GENERAL"));
 // console.log(onCallUserIdsForEvent("on_consult", "STROKE"));
 
 /* -----------------------------------------   QUESTION 2   ----------------------------------------- */
@@ -131,8 +131,8 @@ function onCallGroups(userId) {
   let map = {};
 
   for (let i = 0; i < groups.length; i++) {
-    for (let j = 0; j < groups[i].users.length; j++) {
-      let theUser = groups[i].users[j];
+    for (let i = 0; i < groups[i].users.length; i++) {
+      let theUser = groups[i].users[i];
       if (theUser.on_call) {
         if (theUser.id in map) {
           map[theUser.id].push({ id: groups[i].id, name: groups[i].name });
